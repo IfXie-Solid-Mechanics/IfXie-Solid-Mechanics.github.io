@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ATAT初步学习 | IfXie&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <meta name="description" content="The only way to do great work is to love what you do.">
+    <meta name="keywords" content="Solid Mechanics, Molecular Dynamics, First-principles calculations, AI4S, Linux systems, anime, fitness, indie games on Steam">
+    
+    <link rel="preload" href="/assets/css/0.styles.29f637d1.css" as="style"><link rel="preload" href="/assets/js/app.097a0f7d.js" as="script"><link rel="preload" href="/assets/js/2.d2ce5367.js" as="script"><link rel="preload" href="/assets/js/49.72204dfb.js" as="script"><link rel="prefetch" href="/assets/js/1.722279f4.js"><link rel="prefetch" href="/assets/js/10.19891d84.js"><link rel="prefetch" href="/assets/js/11.9e185d93.js"><link rel="prefetch" href="/assets/js/12.4a28857a.js"><link rel="prefetch" href="/assets/js/13.b04e6210.js"><link rel="prefetch" href="/assets/js/14.9086e4a0.js"><link rel="prefetch" href="/assets/js/15.c7751d3d.js"><link rel="prefetch" href="/assets/js/16.144d2944.js"><link rel="prefetch" href="/assets/js/17.8be6b837.js"><link rel="prefetch" href="/assets/js/18.2e37dce0.js"><link rel="prefetch" href="/assets/js/19.cd27c25a.js"><link rel="prefetch" href="/assets/js/20.0536ad83.js"><link rel="prefetch" href="/assets/js/21.1dda4169.js"><link rel="prefetch" href="/assets/js/22.8fe51422.js"><link rel="prefetch" href="/assets/js/23.96f9674b.js"><link rel="prefetch" href="/assets/js/24.8bf284cb.js"><link rel="prefetch" href="/assets/js/25.9ec0420c.js"><link rel="prefetch" href="/assets/js/26.e1da8845.js"><link rel="prefetch" href="/assets/js/27.fb79d484.js"><link rel="prefetch" href="/assets/js/28.84cc8594.js"><link rel="prefetch" href="/assets/js/29.5b16bdac.js"><link rel="prefetch" href="/assets/js/3.efc1fb6b.js"><link rel="prefetch" href="/assets/js/30.4497f006.js"><link rel="prefetch" href="/assets/js/31.f2f3ce22.js"><link rel="prefetch" href="/assets/js/32.ea05cfd2.js"><link rel="prefetch" href="/assets/js/33.3f73c147.js"><link rel="prefetch" href="/assets/js/34.ce709197.js"><link rel="prefetch" href="/assets/js/35.cacca080.js"><link rel="prefetch" href="/assets/js/36.9c1b4c1f.js"><link rel="prefetch" href="/assets/js/37.3041816e.js"><link rel="prefetch" href="/assets/js/38.3be8ca27.js"><link rel="prefetch" href="/assets/js/39.fc2c6c61.js"><link rel="prefetch" href="/assets/js/4.1e37538c.js"><link rel="prefetch" href="/assets/js/40.0730f9a1.js"><link rel="prefetch" href="/assets/js/41.e433fde6.js"><link rel="prefetch" href="/assets/js/42.7d11e8c1.js"><link rel="prefetch" href="/assets/js/43.bb835161.js"><link rel="prefetch" href="/assets/js/44.b8307700.js"><link rel="prefetch" href="/assets/js/45.a0bdd133.js"><link rel="prefetch" href="/assets/js/46.a82df339.js"><link rel="prefetch" href="/assets/js/47.35e9a0d3.js"><link rel="prefetch" href="/assets/js/48.9de329b4.js"><link rel="prefetch" href="/assets/js/5.3b7e2989.js"><link rel="prefetch" href="/assets/js/50.2da9e157.js"><link rel="prefetch" href="/assets/js/51.a5a9b148.js"><link rel="prefetch" href="/assets/js/52.7e146d7e.js"><link rel="prefetch" href="/assets/js/53.34f31e10.js"><link rel="prefetch" href="/assets/js/54.d72f71cd.js"><link rel="prefetch" href="/assets/js/55.d0d446be.js"><link rel="prefetch" href="/assets/js/56.182538eb.js"><link rel="prefetch" href="/assets/js/57.2cf3eb4a.js"><link rel="prefetch" href="/assets/js/6.4d1e4c53.js"><link rel="prefetch" href="/assets/js/7.dc906a7c.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.075355c8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.29f637d1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="IfXie's Blog" class="logo"> <span class="site-name can-hide">IfXie's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ATAT初步学习</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/VASP_Learning/6_ATAT_Learning.html#_1-下载工具包atat" class="sidebar-link">1 下载工具包ATAT</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_2-安装sqs2poscar" class="sidebar-link">2 安装sqs2poscar</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_3-用atat的mcsqs模块建立fcc构型的feni合金示例" class="sidebar-link">3 用ATAT的mcsqs模块建立FCC构型的FeNi合金示例</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_4-其他结构的rndstr-in文件" class="sidebar-link">4 其他结构的rndstr.in文件</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content"><div style="width:100%"><div class="theme-default-content custom-content content__default"><h1 id="atat初步学习"><a href="#atat初步学习" class="header-anchor">#</a> ATAT初步学习</h1> <p>合金理论自动化工具包(ATAT)是一个通用名称，指的是 Axel van de Walle与多个研究小组合作开发的工具。</p> <h2 id="_1-下载工具包atat"><a href="#_1-下载工具包atat" class="header-anchor">#</a> 1 下载工具包ATAT</h2> <p>在下面的官网中下载源码：</p> <p>http://brown.edu/Departments/Engineering/Labs/avdw//atat/atat3_36.tar.gz</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> <span class="token parameter variable">-xvf</span> atat3_36.tar.gz
+<span class="token comment">#说明：压缩文件没有用gzip格式压缩，因此不需要用选项-z</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>修改makefile文件，由于我已经在服务器上安装了Intel工具包，所以将MPICXX编译器改为intel的c++并行编译器。</p> <p>修改的makefile文件如下</p> <div class="language-makefile line-numbers-mode"><pre class="language-makefile"><code>BINDIR<span class="token operator">=</span>/home/ifxie/06_atat/atat/bin
+<span class="token comment">#for g++ compiler on all platforms</span>
+CXX<span class="token operator">=</span>g++
+
+<span class="token comment">#for MPI: limited implementation at this point</span>
+MPICXX<span class="token operator">=</span>mpicxx -DATAT_MPI 
+
+<span class="token target symbol">all</span><span class="token punctuation">:</span>
+	./foolproof.sh <span class="token variable">$</span><span class="token punctuation">{</span>BINDIR<span class="token punctuation">}</span>   <span class="token string">&quot;${CXX}&quot;</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src clean
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src          <span class="token string">&quot;CXX=${CXX}&quot;</span>
+
+<span class="token target symbol">mpi</span><span class="token punctuation">:</span>
+	./foolproof.sh <span class="token variable">$</span><span class="token punctuation">{</span>BINDIR<span class="token punctuation">}</span>   <span class="token string">&quot;${MPICXX}&quot;</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src clean
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src          <span class="token string">&quot;CXX=${MPICXX}&quot;</span>  mpi
+
+<span class="token target symbol">force</span><span class="token punctuation">:</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src          <span class="token string">&quot;CXX=${CXX}&quot;</span>
+
+<span class="token target symbol">clean</span><span class="token punctuation">:</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src clean
+
+<span class="token target symbol">install</span><span class="token punctuation">:</span>
+	echo set atatdir<span class="token operator">=</span><span class="token string">&quot;$(PWD)&quot;</span> &gt; <span class="token variable">$</span><span class="token punctuation">(</span>HOME<span class="token punctuation">)</span>/.atat.rc
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C src          BINDIR<span class="token operator">=</span><span class="token variable">$</span><span class="token punctuation">{</span>BINDIR<span class="token punctuation">}</span> install
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C glue/jobctrl BINDIR<span class="token operator">=</span><span class="token variable">$</span><span class="token punctuation">{</span>BINDIR<span class="token punctuation">}</span> install
+	<span class="token variable">$</span><span class="token punctuation">{</span>MAKE<span class="token punctuation">}</span> -C glue/vasp    BINDIR<span class="token operator">=</span><span class="token variable">$</span><span class="token punctuation">{</span>BINDIR<span class="token punctuation">}</span> install
+
+<span class="token target symbol">uninstall</span><span class="token punctuation">:</span>
+	rm -f `cat src/safecpdir/touninstall.txt glue/jobctrl/safecpdir/touninstall.txt glue/vasp/safecpdir/touninstall.txt`
+	rm -i <span class="token variable">$</span><span class="token punctuation">{</span>HOME<span class="token punctuation">}</span>/.atat.rc <span class="token variable">$</span><span class="token punctuation">{</span>HOME<span class="token punctuation">}</span>/.ezvasp <span class="token variable">$</span><span class="token punctuation">{</span>HOME<span class="token punctuation">}</span>/.machines.rc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><p>安装csh</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> csh
+<span class="token comment">#在ubuntu系统</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>安装atat</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">#如果你的makefile文件和我一样，就这样运行两个命令</span>
+<span class="token function">make</span> all
+<span class="token function">make</span> <span class="token function">install</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>环境配置，进入到/home/ubuntu/7_atat/atat/bin目录</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">echo</span> <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>/:<span class="token punctuation">\</span><span class="token environment constant">$PATH</span><span class="token operator">&gt;&gt;</span> ~/.bashrc
+<span class="token comment">#更新环境</span>
+<span class="token builtin class-name">source</span> ~/.bashrc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="_2-安装sqs2poscar"><a href="#_2-安装sqs2poscar" class="header-anchor">#</a> 2 安装sqs2poscar</h2> <p>sqs2poscar是一个基于C++代码写的插件，作用是“Converting output from ATAT mcsqs to POSCAR format”。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">git</span> clone https://github.com/c-niu/sqs2poscar.git
+<span class="token builtin class-name">cd</span> sqs2poscar
+<span class="token function">vi</span> sqs2poscar.cpp
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>在C++代码前加上两个库（原因可以自己看插件的Readme）</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#include &lt;cstring&gt;
+#include &lt;stdlib.h&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>用c++编译器编译</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>c++ ./sqs2poscar.cpp <span class="token parameter variable">-o</span> ./sqs2poscar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>配置环境变量</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">vi</span> ~/.bashrc
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/lebedmi2/SOFTWARE/ATAT/sqs2poscar:<span class="token environment constant">$PATH</span>
+<span class="token builtin class-name">source</span> ~/.bashrc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="_3-用atat的mcsqs模块建立fcc构型的feni合金示例"><a href="#_3-用atat的mcsqs模块建立fcc构型的feni合金示例" class="header-anchor">#</a> 3 用ATAT的mcsqs模块建立FCC构型的FeNi合金示例</h2> <p>创建一个rndstr.in文件</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">vi</span> rndstr.in
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language-rndstr.in line-numbers-mode"><pre class="language-text"><code>1.00000000 0.00000000 0.00000000
+0.00000000 1.00000000 0.00000000
+0.00000000 0.00000000 1.00000000
+1 0 0
+0 1 0
+0 0 1
+0.00000000 0.00000000 0.00000000 Fe=0.5, Ni=0.5
+0.50000000 0.50000000 0.00000000 Fe=0.5, Ni=0.5
+0.00000000 0.50000000 0.50000000 Fe=0.5, Ni=0.5
+0.50000000 0.00000000 0.50000000 Fe=0.5, Ni=0.5
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>说明：可以修改部分有1个，元素比例Fe=0.5, Ni=0.5；</p> <p>创建sqscell.out文件，说明扩胞方法：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">vi</span> sqscell.out
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language-sqscell.out line-numbers-mode"><pre class="language-text"><code>1
+3 0 0
+0 3 0
+0 0 3
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>运行mcsqs命令</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>mcsqs <span class="token parameter variable">-2</span><span class="token operator">=</span><span class="token number">2</span> 
+mcsqs <span class="token parameter variable">-rc</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>一般可以提前停止，否则整个运行时长极长，然后使用bestsqs.out文件是自由能最低的sqs；</p> <p>可以在mcsqs.log文件中查询自由能。</p> <p>用插件对于输出结果进行转换。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>sqs2poscar bestsqs.out
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>设置晶格常数。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'2s/.*/3.45/'</span> bestsqs.out-POSCAR
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>说明：可以修改部分有1个，晶格常数3.45,注意这里不是超晶胞的晶格常数，而是原胞的晶格常数。</p> <p>最后，用atomsk对于文件bestsqs.out-POSCAR进行优化</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>atomsk bestsqs.out-POSCAR <span class="token parameter variable">-sort</span> species up <span class="token parameter variable">-frac</span> POSCAR
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="_4-其他结构的rndstr-in文件"><a href="#_4-其他结构的rndstr-in文件" class="header-anchor">#</a> 4 其他结构的rndstr.in文件</h2> <p>bcc结构</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1.00000000 0.00000000 0.00000000
+0.00000000 1.00000000 0.00000000
+0.00000000 0.00000000 1.00000000
+1 0 0
+0 1 0
+0 0 1
+0.00000000 0.00000000 0.00000000 Cr=.25,Fe=.25,Ni=.25,Cu=.25
+0.50000000 0.50000000 0.50000000 Cr=.25,Fe=.25,Ni=.25,Cu=.25
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>hcp结构</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1 0.00000000 0.00000000
+-0.5 0.86602540 0.00000000
+0.00000000 0.00000000 1.58800000
+1 0 0
+0 1 0
+0 0 1
+0.00000000 0.00000000 0.00000000 Cr=.25,Fe=.25,Ni=.25,Cu=.25
+0.33333333 0.66666667 0.50000000 Cr=.25,Fe=.25,Ni=.25,Cu=.25
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>sc结构</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1.00000000 0.00000000 0.00000000
+0.00000000 1.00000000 0.00000000
+0.00000000 0.00000000 1.00000000
+1 0 0
+0 1 0
+0 0 1
+0.00000000 0.00000000 0.00000000 Cr=.25,Fe=.25,Ni=.25,Cu=.25
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></div> <footer class="page-edit" style="margin:0;"><div class="edit-link"><a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo/edit/master/VASP_Learning/6_ATAT_Learning.md" target="_blank" rel="noopener noreferrer">完善页面</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <!----></div> <div class="toc-container-sidebar"><div class="pos-box"><div class="icon-arrow"></div> <div class="scroll-box" style="max-height:86vh"><div style="font-weight:bold;">ATAT初步学习</div> <hr> <div class="toc-box"><ul class="toc-sidebar-links"><li><a href="/VASP_Learning/6_ATAT_Learning.html#_1-下载工具包atat" class="toc-sidebar-link">1 下载工具包ATAT</a><ul class="toc-sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_2-安装sqs2poscar" class="toc-sidebar-link">2 安装sqs2poscar</a><ul class="toc-sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_3-用atat的mcsqs模块建立fcc构型的feni合金示例" class="toc-sidebar-link">3 用ATAT的mcsqs模块建立FCC构型的FeNi合金示例</a><ul class="toc-sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/6_ATAT_Learning.html#_4-其他结构的rndstr-in文件" class="toc-sidebar-link">4 其他结构的rndstr.in文件</a><ul class="toc-sidebar-sub-headers"></ul></li></ul></div></div></div></div></div>  <main class="footer"> <div class="copy-right"><span class="name"> 编程导航   |     </span> <a target="_blank" rel="noreferrer">
+          
+        </a></div></main></main> <aside class="page-sidebar"> <div class="page-side-toolbar"></div>  </aside></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.097a0f7d.js" defer></script><script src="/assets/js/2.d2ce5367.js" defer></script><script src="/assets/js/49.72204dfb.js" defer></script>
+  </body>
+</html>

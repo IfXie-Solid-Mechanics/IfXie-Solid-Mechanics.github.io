@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VASP中，对于Fe和Ni的超晶胞做收敛性测试 | IfXie&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <meta name="description" content="The only way to do great work is to love what you do.">
+    <meta name="keywords" content="Solid Mechanics, Molecular Dynamics, First-principles calculations, AI4S, Linux systems, anime, fitness, indie games on Steam">
+    
+    <link rel="preload" href="/assets/css/0.styles.29f637d1.css" as="style"><link rel="preload" href="/assets/js/app.097a0f7d.js" as="script"><link rel="preload" href="/assets/js/2.d2ce5367.js" as="script"><link rel="preload" href="/assets/js/48.9de329b4.js" as="script"><link rel="prefetch" href="/assets/js/1.722279f4.js"><link rel="prefetch" href="/assets/js/10.19891d84.js"><link rel="prefetch" href="/assets/js/11.9e185d93.js"><link rel="prefetch" href="/assets/js/12.4a28857a.js"><link rel="prefetch" href="/assets/js/13.b04e6210.js"><link rel="prefetch" href="/assets/js/14.9086e4a0.js"><link rel="prefetch" href="/assets/js/15.c7751d3d.js"><link rel="prefetch" href="/assets/js/16.144d2944.js"><link rel="prefetch" href="/assets/js/17.8be6b837.js"><link rel="prefetch" href="/assets/js/18.2e37dce0.js"><link rel="prefetch" href="/assets/js/19.cd27c25a.js"><link rel="prefetch" href="/assets/js/20.0536ad83.js"><link rel="prefetch" href="/assets/js/21.1dda4169.js"><link rel="prefetch" href="/assets/js/22.8fe51422.js"><link rel="prefetch" href="/assets/js/23.96f9674b.js"><link rel="prefetch" href="/assets/js/24.8bf284cb.js"><link rel="prefetch" href="/assets/js/25.9ec0420c.js"><link rel="prefetch" href="/assets/js/26.e1da8845.js"><link rel="prefetch" href="/assets/js/27.fb79d484.js"><link rel="prefetch" href="/assets/js/28.84cc8594.js"><link rel="prefetch" href="/assets/js/29.5b16bdac.js"><link rel="prefetch" href="/assets/js/3.efc1fb6b.js"><link rel="prefetch" href="/assets/js/30.4497f006.js"><link rel="prefetch" href="/assets/js/31.f2f3ce22.js"><link rel="prefetch" href="/assets/js/32.ea05cfd2.js"><link rel="prefetch" href="/assets/js/33.3f73c147.js"><link rel="prefetch" href="/assets/js/34.ce709197.js"><link rel="prefetch" href="/assets/js/35.cacca080.js"><link rel="prefetch" href="/assets/js/36.9c1b4c1f.js"><link rel="prefetch" href="/assets/js/37.3041816e.js"><link rel="prefetch" href="/assets/js/38.3be8ca27.js"><link rel="prefetch" href="/assets/js/39.fc2c6c61.js"><link rel="prefetch" href="/assets/js/4.1e37538c.js"><link rel="prefetch" href="/assets/js/40.0730f9a1.js"><link rel="prefetch" href="/assets/js/41.e433fde6.js"><link rel="prefetch" href="/assets/js/42.7d11e8c1.js"><link rel="prefetch" href="/assets/js/43.bb835161.js"><link rel="prefetch" href="/assets/js/44.b8307700.js"><link rel="prefetch" href="/assets/js/45.a0bdd133.js"><link rel="prefetch" href="/assets/js/46.a82df339.js"><link rel="prefetch" href="/assets/js/47.35e9a0d3.js"><link rel="prefetch" href="/assets/js/49.72204dfb.js"><link rel="prefetch" href="/assets/js/5.3b7e2989.js"><link rel="prefetch" href="/assets/js/50.2da9e157.js"><link rel="prefetch" href="/assets/js/51.a5a9b148.js"><link rel="prefetch" href="/assets/js/52.7e146d7e.js"><link rel="prefetch" href="/assets/js/53.34f31e10.js"><link rel="prefetch" href="/assets/js/54.d72f71cd.js"><link rel="prefetch" href="/assets/js/55.d0d446be.js"><link rel="prefetch" href="/assets/js/56.182538eb.js"><link rel="prefetch" href="/assets/js/57.2cf3eb4a.js"><link rel="prefetch" href="/assets/js/6.4d1e4c53.js"><link rel="prefetch" href="/assets/js/7.dc906a7c.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.075355c8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.29f637d1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="IfXie's Blog" class="logo"> <span class="site-name can-hide">IfXie's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VASP中，对于Fe和Ni的超晶胞做收敛性测试</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_1-准备文件" class="sidebar-link">1 准备文件</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_2-kspacing收敛性测试" class="sidebar-link">2 KSPACING收敛性测试</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_3-encut收敛性测试" class="sidebar-link">3 ENCUT收敛性测试</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content"><div style="width:100%"><div class="theme-default-content custom-content content__default"><h1 id="vasp中-对于fe和ni的超晶胞做收敛性测试"><a href="#vasp中-对于fe和ni的超晶胞做收敛性测试" class="header-anchor">#</a> VASP中，对于Fe和Ni的超晶胞做收敛性测试</h1> <h2 id="_1-准备文件"><a href="#_1-准备文件" class="header-anchor">#</a> 1 准备文件</h2> <ol><li>POSCAR文件（仅展示Fe，Ni仅把晶格常数进行了调整）(atomsk生成)</li></ol> <div class="language-POSCAR line-numbers-mode"><pre class="language-text"><code># Fcc Fe oriented X=[100], Y=[010], Z=[001].
+1.000000
+     10.44900000        0.00000000        0.00000000
+      0.00000000       10.44900000        0.00000000
+      0.00000000        0.00000000       10.44900000
+ Fe
+   108
+Cartesian
+      0.00000000        0.00000000        0.00000000
+      1.74150000        1.74150000        0.00000000
+      0.00000000        1.74150000        1.74150000
+      1.74150000        0.00000000        1.74150000
+      3.48300000        0.00000000        0.00000000
+      5.22450000        1.74150000        0.00000000
+      3.48300000        1.74150000        1.74150000
+      5.22450000        0.00000000        1.74150000
+      6.96600000        0.00000000        0.00000000
+      8.70750000        1.74150000        0.00000000
+      6.96600000        1.74150000        1.74150000
+      8.70750000        0.00000000        1.74150000
+      0.00000000        3.48300000        0.00000000
+      1.74150000        5.22450000        0.00000000
+      0.00000000        5.22450000        1.74150000
+      1.74150000        3.48300000        1.74150000
+      3.48300000        3.48300000        0.00000000
+      5.22450000        5.22450000        0.00000000
+      3.48300000        5.22450000        1.74150000
+      5.22450000        3.48300000        1.74150000
+      6.96600000        3.48300000        0.00000000
+      8.70750000        5.22450000        0.00000000
+      6.96600000        5.22450000        1.74150000
+      8.70750000        3.48300000        1.74150000
+      0.00000000        6.96600000        0.00000000
+      1.74150000        8.70750000        0.00000000
+      0.00000000        8.70750000        1.74150000
+      1.74150000        6.96600000        1.74150000
+      3.48300000        6.96600000        0.00000000
+      5.22450000        8.70750000        0.00000000
+      3.48300000        8.70750000        1.74150000
+      5.22450000        6.96600000        1.74150000
+      6.96600000        6.96600000        0.00000000
+      8.70750000        8.70750000        0.00000000
+      6.96600000        8.70750000        1.74150000
+      8.70750000        6.96600000        1.74150000
+      0.00000000        0.00000000        3.48300000
+      1.74150000        1.74150000        3.48300000
+      0.00000000        1.74150000        5.22450000
+      1.74150000        0.00000000        5.22450000
+      3.48300000        0.00000000        3.48300000
+      5.22450000        1.74150000        3.48300000
+      3.48300000        1.74150000        5.22450000
+      5.22450000        0.00000000        5.22450000
+      6.96600000        0.00000000        3.48300000
+      8.70750000        1.74150000        3.48300000
+      6.96600000        1.74150000        5.22450000
+      8.70750000        0.00000000        5.22450000
+      0.00000000        3.48300000        3.48300000
+      1.74150000        5.22450000        3.48300000
+      0.00000000        5.22450000        5.22450000
+      1.74150000        3.48300000        5.22450000
+      3.48300000        3.48300000        3.48300000
+      5.22450000        5.22450000        3.48300000
+      3.48300000        5.22450000        5.22450000
+      5.22450000        3.48300000        5.22450000
+      6.96600000        3.48300000        3.48300000
+      8.70750000        5.22450000        3.48300000
+      6.96600000        5.22450000        5.22450000
+      8.70750000        3.48300000        5.22450000
+      0.00000000        6.96600000        3.48300000
+      1.74150000        8.70750000        3.48300000
+      0.00000000        8.70750000        5.22450000
+      1.74150000        6.96600000        5.22450000
+      3.48300000        6.96600000        3.48300000
+      5.22450000        8.70750000        3.48300000
+      3.48300000        8.70750000        5.22450000
+      5.22450000        6.96600000        5.22450000
+      6.96600000        6.96600000        3.48300000
+      8.70750000        8.70750000        3.48300000
+      6.96600000        8.70750000        5.22450000
+      8.70750000        6.96600000        5.22450000
+      0.00000000        0.00000000        6.96600000
+      1.74150000        1.74150000        6.96600000
+      0.00000000        1.74150000        8.70750000
+      1.74150000        0.00000000        8.70750000
+      3.48300000        0.00000000        6.96600000
+      5.22450000        1.74150000        6.96600000
+      3.48300000        1.74150000        8.70750000
+      5.22450000        0.00000000        8.70750000
+      6.96600000        0.00000000        6.96600000
+      8.70750000        1.74150000        6.96600000
+      6.96600000        1.74150000        8.70750000
+      8.70750000        0.00000000        8.70750000
+      0.00000000        3.48300000        6.96600000
+      1.74150000        5.22450000        6.96600000
+      0.00000000        5.22450000        8.70750000
+      1.74150000        3.48300000        8.70750000
+      3.48300000        3.48300000        6.96600000
+      5.22450000        5.22450000        6.96600000
+      3.48300000        5.22450000        8.70750000
+      5.22450000        3.48300000        8.70750000
+      6.96600000        3.48300000        6.96600000
+      8.70750000        5.22450000        6.96600000
+      6.96600000        5.22450000        8.70750000
+      8.70750000        3.48300000        8.70750000
+      0.00000000        6.96600000        6.96600000
+      1.74150000        8.70750000        6.96600000
+      0.00000000        8.70750000        8.70750000
+      1.74150000        6.96600000        8.70750000
+      3.48300000        6.96600000        6.96600000
+      5.22450000        8.70750000        6.96600000
+      3.48300000        8.70750000        8.70750000
+      5.22450000        6.96600000        8.70750000
+      6.96600000        6.96600000        6.96600000
+      8.70750000        8.70750000        6.96600000
+      6.96600000        8.70750000        8.70750000
+      8.70750000        6.96600000        8.70750000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br></div></div><div class="language-bash line-numbers-mode"><pre class="language-bash"><code>atomsk <span class="token parameter variable">--create</span> fcc <span class="token number">3.483</span> Fe <span class="token parameter variable">-duplicate</span> <span class="token number">3</span> <span class="token number">3</span> <span class="token number">3</span> POSCAR
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="2"><li><p>POTCAR文件，均使用pv版本赝势；</p></li> <li><p>计算脚本文件，下面详细介绍。</p></li></ol> <h2 id="_2-kspacing收敛性测试"><a href="#_2-kspacing收敛性测试" class="header-anchor">#</a> 2 KSPACING收敛性测试</h2> <ol><li>计算脚本文件cal.slurm（grep命令的信息我都检查过）</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>#! /bin/bash
+#SBATCH -J vasp
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=64
+#SBATCH -p wzhcnormal
+
+module purge
+source /work/home/if_xie/apprepo/vasp/6.4.1-ioptcell_intelmpi2017_hdf5_libxc/scripts/env.sh
+
+export MKL_DEBUG_CPU_TYPE=5 #加速代码
+export MKL_CBWR=AVX2 #使cpu默认支持avx2
+export I_MPI_PIN_DOMAIN=numa #内存位置与cpu位置绑定，加速内存读取。对于内存带宽要求高的计算提速明显
+
+rm kspace_energy.out
+for i in $(seq 0.5 -0.05 0.1) 
+do
+rm WAVECAR
+cat &gt;INCAR &lt;&lt;!
+ISMEAR = 1; 
+SIGMA = 0.2;
+
+MAGMOM = 108*2
+ISPIN = 2
+EDIFF = 1E-4
+
+NCORE = 2 up to number-of-cores-per-socket
+KSPACING = $i
+!
+echo &quot;KSPACING = $i&quot; ; srun --mpi=pmi2 vasp_std
+E=$(grep &quot;TOTEN&quot; OUTCAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $5 }')
+T=$(grep &quot;Total CPU time&quot; OUTCAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $6 }')
+M=$(grep &quot;mag&quot; OSZICAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $10 }')
+echo $i $E $T $M&gt;&gt;kspace_energy.out
+echo $(grep &quot;generate k-points for&quot; OUTCAR )&gt;&gt;kspace_num.out
+done
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><ol start="2"><li>计算结果</li></ol> <p>先看kspace_num.out文件，即可以看到每次KSPACING对应的取点（符合超晶胞晶格取值）</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#Fe
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 3 3 3
+generate k-points for: 3 3 3
+generate k-points for: 4 4 4
+generate k-points for: 5 5 5
+generate k-points for: 7 7 7
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>#Ni
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 2 2 2
+generate k-points for: 3 3 3
+generate k-points for: 3 3 3
+generate k-points for: 4 4 4
+generate k-points for: 6 6 6
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>这里体现了脚本没写好的地方，每次递降x可能会导致重算和空算的问题。</p> <p>然后再来看kspace_energy.out文件，其第一列为KSPACING，第二列为总能量(eV)，第三列为总时间(s)，第四列为总磁矩(<mjx-container jax="SVG" class="MathJax" style="direction:ltr;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="3.081ex" height="2.034ex" role="img" focusable="false" viewBox="0 -683 1362 899" aria-hidden="true" style="overflow:visible;min-height:1px;min-width:1px;vertical-align:-0.489ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D707" d="M58 -216Q44 -216 34 -208T23 -186Q23 -176 96 116T173 414Q186 442 219 442Q231 441 239 435T249 423T251 413Q251 401 220 279T187 142Q185 131 185 107V99Q185 26 252 26Q261 26 270 27T287 31T302 38T315 45T327 55T338 65T348 77T356 88T365 100L372 110L408 253Q444 395 448 404Q461 431 491 431Q504 431 512 424T523 412T525 402L449 84Q448 79 448 68Q448 43 455 35T476 26Q485 27 496 35Q517 55 537 131Q543 151 547 152Q549 153 557 153H561Q580 153 580 144Q580 138 575 117T555 63T523 13Q510 0 491 -8Q483 -10 467 -10Q446 -10 429 -4T402 11T385 29T376 44T374 51L368 45Q362 39 350 30T324 12T288 -4T246 -11Q199 -11 153 12L129 -85Q108 -167 104 -180T92 -202Q76 -216 58 -216Z" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(603,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z" style="stroke-width:3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top:0px;left:0px;clip:rect(1px, 1px, 1px, 1px);-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:absolute;padding:1px 0px 0px 0px;border:0px;display:block;width:auto;overflow:hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>μ</mi><mi>B</mi></math></mjx-assistive-mml></mjx-container>)</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#Fe
+0.50 -874.477501800 606.181000000 126.276800000
+0.45 -874.477501810 602.758000000 126.277400000
+0.40 -874.477501810 593.965000000 126.277400000
+0.35 -874.477501800 596.938000000 126.276800000
+0.30 -875.269314060 553.418000000 104.405900000
+0.25 -875.269314060 543.981000000 104.405900000
+0.20 -875.278372220 1338.664000000 105.014300000
+0.15 -875.233569560 1332.419000000 104.399100000
+0.10 -875.234545900 2671.992000000 104.203100000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>#Ni
+0.50 -590.305988690 766.327000000 76.214500000
+0.45 -590.305988690 761.677000000 76.214500000
+0.40 -590.305988700 753.761000000 76.214500000
+0.35 -590.305988700 761.018000000 76.214500000
+0.30 -590.305988690 753.627000000 76.214500000
+0.25 -590.599973300 829.309000000 65.622900000
+0.20 -590.599973300 827.342000000 65.622900000
+0.15 -590.372242300 1939.906000000 70.005400000
+0.10 -590.402336470 3733.718000000 68.718700000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>可以看出Ni的磁矩逐渐接近Mishin测试值<mjx-container jax="SVG" class="MathJax" style="direction:ltr;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.367ex" height="2.034ex" role="img" focusable="false" viewBox="0 -683 4140 899" aria-hidden="true" style="overflow:visible;min-height:1px;min-width:1px;vertical-align:-0.489ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" style="stroke-width:3;"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(500,0)" style="stroke-width:3;"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(1000,0)" style="stroke-width:3;"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(1278,0)" style="stroke-width:3;"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(1778,0)" style="stroke-width:3;"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(2278,0)" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(2778,0)"><path data-c="1D707" d="M58 -216Q44 -216 34 -208T23 -186Q23 -176 96 116T173 414Q186 442 219 442Q231 441 239 435T249 423T251 413Q251 401 220 279T187 142Q185 131 185 107V99Q185 26 252 26Q261 26 270 27T287 31T302 38T315 45T327 55T338 65T348 77T356 88T365 100L372 110L408 253Q444 395 448 404Q461 431 491 431Q504 431 512 424T523 412T525 402L449 84Q448 79 448 68Q448 43 455 35T476 26Q485 27 496 35Q517 55 537 131Q543 151 547 152Q549 153 557 153H561Q580 153 580 144Q580 138 575 117T555 63T523 13Q510 0 491 -8Q483 -10 467 -10Q446 -10 429 -4T402 11T385 29T376 44T374 51L368 45Q362 39 350 30T324 12T288 -4T246 -11Q199 -11 153 12L129 -85Q108 -167 104 -180T92 -202Q76 -216 58 -216Z" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(3381,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z" style="stroke-width:3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top:0px;left:0px;clip:rect(1px, 1px, 1px, 1px);-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:absolute;padding:1px 0px 0px 0px;border:0px;display:block;width:auto;overflow:hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>68.148</mn><mi>μ</mi><mi>B</mi></math></mjx-assistive-mml></mjx-container>,但是计算代价过高（约1小时一个离子步）</p> <p>对于Fe的磁矩，越发的远离Mishin测试值<mjx-container jax="SVG" class="MathJax" style="direction:ltr;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="10.498ex" height="2.034ex" role="img" focusable="false" viewBox="0 -683 4640 899" aria-hidden="true" style="overflow:visible;min-height:1px;min-width:1px;vertical-align:-0.489ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" style="stroke-width:3;"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(500,0)" style="stroke-width:3;"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(1000,0)" style="stroke-width:3;"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(1500,0)" style="stroke-width:3;"></path><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z" transform="translate(1778,0)" style="stroke-width:3;"></path><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" transform="translate(2278,0)" style="stroke-width:3;"></path><path data-c="36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z" transform="translate(2778,0)" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(3278,0)"><path data-c="1D707" d="M58 -216Q44 -216 34 -208T23 -186Q23 -176 96 116T173 414Q186 442 219 442Q231 441 239 435T249 423T251 413Q251 401 220 279T187 142Q185 131 185 107V99Q185 26 252 26Q261 26 270 27T287 31T302 38T315 45T327 55T338 65T348 77T356 88T365 100L372 110L408 253Q444 395 448 404Q461 431 491 431Q504 431 512 424T523 412T525 402L449 84Q448 79 448 68Q448 43 455 35T476 26Q485 27 496 35Q517 55 537 131Q543 151 547 152Q549 153 557 153H561Q580 153 580 144Q580 138 575 117T555 63T523 13Q510 0 491 -8Q483 -10 467 -10Q446 -10 429 -4T402 11T385 29T376 44T374 51L368 45Q362 39 350 30T324 12T288 -4T246 -11Q199 -11 153 12L129 -85Q108 -167 104 -180T92 -202Q76 -216 58 -216Z" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(3881,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z" style="stroke-width:3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top:0px;left:0px;clip:rect(1px, 1px, 1px, 1px);-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:absolute;padding:1px 0px 0px 0px;border:0px;display:block;width:auto;overflow:hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>144.936</mn><mi>μ</mi><mi>B</mi></math></mjx-assistive-mml></mjx-container>,原因未知。（重点讨论问题）</p> <h2 id="_3-encut收敛性测试"><a href="#_3-encut收敛性测试" class="header-anchor">#</a> 3 ENCUT收敛性测试</h2> <ol><li>计算脚本文件cal.slurm（以Fe为实例，因为出于磁矩接近与计算成本的角度，我对于Fe的KSPACING取的是0.35，对于Ni的KSPACING取的是0.25）</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>#! /bin/bash
+#SBATCH -J vasp
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=64
+#SBATCH -p wzhcnormal
+
+module purge
+source /work/home/if_xie/apprepo/vasp/6.4.1-ioptcell_intelmpi2017_hdf5_libxc/scripts/env.sh
+
+export MKL_DEBUG_CPU_TYPE=5 #加速代码
+export MKL_CBWR=AVX2 #使cpu默认支持avx2
+export I_MPI_PIN_DOMAIN=numa #内存位置与cpu位置绑定，加速内存读取。对于内存带宽要求高的计算提速明显
+
+rm encut_energy.out
+for i in $(seq 293.2380 29.3238 439.8570) 
+do
+rm WAVECAR
+cat &gt;INCAR &lt;&lt;!
+ISMEAR = 1; 
+SIGMA = 0.2;
+
+MAGMOM = 108*2
+ISPIN = 2
+EDIFF = 1E-4
+
+ENCUT = $i
+
+NCORE = 2 up to number-of-cores-per-socket
+KSPACING = 0.35
+!
+srun --mpi=pmi2 vasp_std
+E=$(grep &quot;TOTEN&quot; OUTCAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $5 }')
+T=$(grep &quot;Total CPU time&quot; OUTCAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $6 }')
+M=$(grep &quot;mag&quot; OSZICAR | tail -1 | awk '{printf &quot;%12.9f \n&quot;, $10 }')
+echo $i $E $T $M&gt;&gt;encut_energy.out
+done
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><ol start="2"><li>计算结果</li></ol> <p>直接看encut_energy.out文件，其第一列为ENCUT，第二列为总能量(eV)，第三列为总时间(s)，第四列为总磁矩(<mjx-container jax="SVG" class="MathJax" style="direction:ltr;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="3.081ex" height="2.034ex" role="img" focusable="false" viewBox="0 -683 1362 899" aria-hidden="true" style="overflow:visible;min-height:1px;min-width:1px;vertical-align:-0.489ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D707" d="M58 -216Q44 -216 34 -208T23 -186Q23 -176 96 116T173 414Q186 442 219 442Q231 441 239 435T249 423T251 413Q251 401 220 279T187 142Q185 131 185 107V99Q185 26 252 26Q261 26 270 27T287 31T302 38T315 45T327 55T338 65T348 77T356 88T365 100L372 110L408 253Q444 395 448 404Q461 431 491 431Q504 431 512 424T523 412T525 402L449 84Q448 79 448 68Q448 43 455 35T476 26Q485 27 496 35Q517 55 537 131Q543 151 547 152Q549 153 557 153H561Q580 153 580 144Q580 138 575 117T555 63T523 13Q510 0 491 -8Q483 -10 467 -10Q446 -10 429 -4T402 11T385 29T376 44T374 51L368 45Q362 39 350 30T324 12T288 -4T246 -11Q199 -11 153 12L129 -85Q108 -167 104 -180T92 -202Q76 -216 58 -216Z" style="stroke-width:3;"></path></g><g data-mml-node="mi" transform="translate(603,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z" style="stroke-width:3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top:0px;left:0px;clip:rect(1px, 1px, 1px, 1px);-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:absolute;padding:1px 0px 0px 0px;border:0px;display:block;width:auto;overflow:hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>μ</mi><mi>B</mi></math></mjx-assistive-mml></mjx-container>)</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#Fe
+293.2380 -874.477501790 601.883000000 126.276800000
+322.5618 -875.932381320 654.233000000 126.158100000
+351.8856 -875.773332570 724.978000000 127.190400000
+381.2094 -875.258937820 804.389000000 127.598900000
+410.5332 -874.938817090 901.563000000 127.760500000
+439.8570 -874.830178390 1077.690000000 127.777000000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>#Ni
+367.9860 -590.599973300 851.686000000 65.622900000
+404.7846 -593.611370230 1053.888000000 65.676800000
+441.5832 -593.770955780 1446.640000000 65.678700000
+478.3818 -593.509220580 2073.136000000 65.656400000
+515.1804 -593.126320220 3067.150000000 65.637500000
+551.9790 -592.848542780 4048.459000000 65.628000000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>调整ENCUT对于磁矩的影响很小；</p> <p>从能量和时间的观点比较，将ENCUT调整为原来的1.1倍似乎更好。</p></div> <footer class="page-edit" style="margin:0;"><div class="edit-link"><a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo/edit/master/VASP_Learning/4_vasp_kspacing_encut.md" target="_blank" rel="noopener noreferrer">完善页面</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <!----></div> <div class="toc-container-sidebar"><div class="pos-box"><div class="icon-arrow"></div> <div class="scroll-box" style="max-height:86vh"><div style="font-weight:bold;">VASP中，对于Fe和Ni的超晶胞做收敛性测试</div> <hr> <div class="toc-box"><ul class="toc-sidebar-links"><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_1-准备文件" class="toc-sidebar-link">1 准备文件</a><ul class="toc-sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_2-kspacing收敛性测试" class="toc-sidebar-link">2 KSPACING收敛性测试</a><ul class="toc-sidebar-sub-headers"></ul></li><li><a href="/VASP_Learning/4_vasp_kspacing_encut.html#_3-encut收敛性测试" class="toc-sidebar-link">3 ENCUT收敛性测试</a><ul class="toc-sidebar-sub-headers"></ul></li></ul></div></div></div></div></div>  <main class="footer"> <div class="copy-right"><span class="name"> 编程导航   |     </span> <a target="_blank" rel="noreferrer">
+          
+        </a></div></main></main> <aside class="page-sidebar"> <div class="page-side-toolbar"></div>  </aside></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.097a0f7d.js" defer></script><script src="/assets/js/2.d2ce5367.js" defer></script><script src="/assets/js/48.9de329b4.js" defer></script>
+  </body>
+</html>
