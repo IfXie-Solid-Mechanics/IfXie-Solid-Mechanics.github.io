@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VASP五元合金112表面构型计算工作流 | IfXie&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <meta name="description" content="The only way to do great work is to love what you do.">
+    <meta name="keywords" content="Solid Mechanics, Molecular Dynamics, First-principles calculations, AI4S, Linux systems, anime, fitness, indie games on Steam">
+    
+    <link rel="preload" href="/assets/css/0.styles.2f1e26cc.css" as="style"><link rel="preload" href="/assets/js/app.315c8cdd.js" as="script"><link rel="preload" href="/assets/js/2.d14395a5.js" as="script"><link rel="preload" href="/assets/js/87.f05e0fc1.js" as="script"><link rel="prefetch" href="/assets/js/1.cb40a502.js"><link rel="prefetch" href="/assets/js/10.a06bb1eb.js"><link rel="prefetch" href="/assets/js/100.d8f86cd3.js"><link rel="prefetch" href="/assets/js/101.bed104a2.js"><link rel="prefetch" href="/assets/js/102.b4d03739.js"><link rel="prefetch" href="/assets/js/103.95a18d9e.js"><link rel="prefetch" href="/assets/js/104.61995454.js"><link rel="prefetch" href="/assets/js/105.f008ed9c.js"><link rel="prefetch" href="/assets/js/106.1cbca132.js"><link rel="prefetch" href="/assets/js/107.96c5e311.js"><link rel="prefetch" href="/assets/js/108.ff8dd297.js"><link rel="prefetch" href="/assets/js/109.0e2b5264.js"><link rel="prefetch" href="/assets/js/11.1844feda.js"><link rel="prefetch" href="/assets/js/110.bb6d4bd4.js"><link rel="prefetch" href="/assets/js/111.1555679e.js"><link rel="prefetch" href="/assets/js/112.84b3d458.js"><link rel="prefetch" href="/assets/js/12.5db82bdc.js"><link rel="prefetch" href="/assets/js/13.d991dbfd.js"><link rel="prefetch" href="/assets/js/14.4991c582.js"><link rel="prefetch" href="/assets/js/15.8f20b0e9.js"><link rel="prefetch" href="/assets/js/16.da931f02.js"><link rel="prefetch" href="/assets/js/17.ddf6882c.js"><link rel="prefetch" href="/assets/js/18.394e8f93.js"><link rel="prefetch" href="/assets/js/19.166843f8.js"><link rel="prefetch" href="/assets/js/20.5908d844.js"><link rel="prefetch" href="/assets/js/21.d07aa552.js"><link rel="prefetch" href="/assets/js/22.966d7d6b.js"><link rel="prefetch" href="/assets/js/23.2c78a6e6.js"><link rel="prefetch" href="/assets/js/24.a4af1871.js"><link rel="prefetch" href="/assets/js/25.a3177620.js"><link rel="prefetch" href="/assets/js/26.b3ad2bf7.js"><link rel="prefetch" href="/assets/js/27.7bc151ef.js"><link rel="prefetch" href="/assets/js/28.977c97b1.js"><link rel="prefetch" href="/assets/js/29.fd6d35c5.js"><link rel="prefetch" href="/assets/js/3.9ed0fe0f.js"><link rel="prefetch" href="/assets/js/30.4f515c34.js"><link rel="prefetch" href="/assets/js/31.363934fa.js"><link rel="prefetch" href="/assets/js/32.e3f7e7f5.js"><link rel="prefetch" href="/assets/js/33.7ede003b.js"><link rel="prefetch" href="/assets/js/34.3cdd74d8.js"><link rel="prefetch" href="/assets/js/35.0ca46ff5.js"><link rel="prefetch" href="/assets/js/36.788b0036.js"><link rel="prefetch" href="/assets/js/37.4b8ecb30.js"><link rel="prefetch" href="/assets/js/38.948a8a9c.js"><link rel="prefetch" href="/assets/js/39.5833df35.js"><link rel="prefetch" href="/assets/js/4.d61d4261.js"><link rel="prefetch" href="/assets/js/40.0f43e9df.js"><link rel="prefetch" href="/assets/js/41.084d235c.js"><link rel="prefetch" href="/assets/js/42.a644c0c0.js"><link rel="prefetch" href="/assets/js/43.36b0501a.js"><link rel="prefetch" href="/assets/js/44.43176a68.js"><link rel="prefetch" href="/assets/js/45.3f7ff765.js"><link rel="prefetch" href="/assets/js/46.14c3c913.js"><link rel="prefetch" href="/assets/js/47.6b2ba057.js"><link rel="prefetch" href="/assets/js/48.9ce9355f.js"><link rel="prefetch" href="/assets/js/49.41b4f42a.js"><link rel="prefetch" href="/assets/js/5.ee32a04c.js"><link rel="prefetch" href="/assets/js/50.74e7f808.js"><link rel="prefetch" href="/assets/js/51.88a96ee0.js"><link rel="prefetch" href="/assets/js/52.adbed44f.js"><link rel="prefetch" href="/assets/js/53.1584fc24.js"><link rel="prefetch" href="/assets/js/54.c74a8657.js"><link rel="prefetch" href="/assets/js/55.c2c9e357.js"><link rel="prefetch" href="/assets/js/56.72792fbb.js"><link rel="prefetch" href="/assets/js/57.13e54b0b.js"><link rel="prefetch" href="/assets/js/58.1a8945be.js"><link rel="prefetch" href="/assets/js/59.23298057.js"><link rel="prefetch" href="/assets/js/6.e2fe98e2.js"><link rel="prefetch" href="/assets/js/60.5cbf2f68.js"><link rel="prefetch" href="/assets/js/61.09ffef37.js"><link rel="prefetch" href="/assets/js/62.ca082c0b.js"><link rel="prefetch" href="/assets/js/63.3d352ffa.js"><link rel="prefetch" href="/assets/js/64.96e33fa6.js"><link rel="prefetch" href="/assets/js/65.09b96199.js"><link rel="prefetch" href="/assets/js/66.af6869c4.js"><link rel="prefetch" href="/assets/js/67.dbfeb4ae.js"><link rel="prefetch" href="/assets/js/68.a6077bd3.js"><link rel="prefetch" href="/assets/js/69.02482c3b.js"><link rel="prefetch" href="/assets/js/7.f80011a2.js"><link rel="prefetch" href="/assets/js/70.762a2e57.js"><link rel="prefetch" href="/assets/js/71.43f8cb3d.js"><link rel="prefetch" href="/assets/js/72.7e02860e.js"><link rel="prefetch" href="/assets/js/73.5c8874d0.js"><link rel="prefetch" href="/assets/js/74.738551f7.js"><link rel="prefetch" href="/assets/js/75.ff5b07b1.js"><link rel="prefetch" href="/assets/js/76.37b179d5.js"><link rel="prefetch" href="/assets/js/77.8cbb7dd8.js"><link rel="prefetch" href="/assets/js/78.b335eb6e.js"><link rel="prefetch" href="/assets/js/79.f252fb6f.js"><link rel="prefetch" href="/assets/js/80.df5a0c1b.js"><link rel="prefetch" href="/assets/js/81.9c4a74fa.js"><link rel="prefetch" href="/assets/js/82.dd99a6da.js"><link rel="prefetch" href="/assets/js/83.375bfef6.js"><link rel="prefetch" href="/assets/js/84.c203297b.js"><link rel="prefetch" href="/assets/js/85.65859667.js"><link rel="prefetch" href="/assets/js/86.17a85554.js"><link rel="prefetch" href="/assets/js/88.53cf85f1.js"><link rel="prefetch" href="/assets/js/89.eae87e63.js"><link rel="prefetch" href="/assets/js/90.cfffede4.js"><link rel="prefetch" href="/assets/js/91.d4ee7592.js"><link rel="prefetch" href="/assets/js/92.e4319e49.js"><link rel="prefetch" href="/assets/js/93.7d763845.js"><link rel="prefetch" href="/assets/js/94.347d21f0.js"><link rel="prefetch" href="/assets/js/95.238a781b.js"><link rel="prefetch" href="/assets/js/96.04132eb7.js"><link rel="prefetch" href="/assets/js/97.a700d650.js"><link rel="prefetch" href="/assets/js/98.62afc795.js"><link rel="prefetch" href="/assets/js/99.db431a00.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.b562965b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2f1e26cc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="IfXie's Blog" class="logo"> <span class="site-name can-hide">IfXie's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VASP五元合金112表面构型计算工作流</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/VASP_Learning/19_VASP_quinary_surface.html#_1-非振动构型的vasp输入文件生成工作流" class="sidebar-link">1. 非振动构型的VASP输入文件生成工作流</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/VASP_Learning/19_VASP_quinary_surface.html#_1-1-使用atomsk生成初始构型" class="sidebar-link">1.1 使用Atomsk生成初始构型</a></li><li class="sidebar-sub-header"><a href="/VASP_Learning/19_VASP_quinary_surface.html#_1-2-用vasp获得准随机高熵合金构型" class="sidebar-link">1.2 用VASP获得准随机高熵合金构型</a></li></ul></li><li><a href="/VASP_Learning/19_VASP_quinary_surface.html#附录1-非振动构型的vasp输入文件生成工作流" class="sidebar-link">附录1. 非振动构型的VASP输入文件生成工作流</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/VASP_Learning/19_VASP_quinary_surface.html#_1-1-使用atomsk生成初始构型-2" class="sidebar-link">1.1 使用Atomsk生成初始构型</a></li><li class="sidebar-sub-header"><a href="/VASP_Learning/19_VASP_quinary_surface.html#_1-2-用vasp获得准随机高熵合金构型-2" class="sidebar-link">1.2 用VASP获得准随机高熵合金构型</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content single-column"><div class="main-content"><div class="theme-default-content custom-content content__default"><h1 id="vasp五元合金112表面构型计算工作流"><a href="#vasp五元合金112表面构型计算工作流" class="header-anchor">#</a> VASP五元合金112表面构型计算工作流</h1> <h2 id="_1-非振动构型的vasp输入文件生成工作流"><a href="#_1-非振动构型的vasp输入文件生成工作流" class="header-anchor">#</a> 1. 非振动构型的VASP输入文件生成工作流</h2> <p>在~/05_atomsk/surface_112_wuzhen_1/目录下工作；</p> <h3 id="_1-1-使用atomsk生成初始构型"><a href="#_1-1-使用atomsk生成初始构型" class="header-anchor">#</a> 1.1 使用Atomsk生成初始构型</h3> <p>创建CrFeCoNiPd目录，并进入该目录。</p> <p>初始完美晶格的生成采用Atomsk，元素的话先随便写了一个Ni，命令如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>atomsk <span class="token parameter variable">--create</span> fcc <span class="token number">3.53</span> Ni orient <span class="token punctuation">[</span><span class="token number">11</span>-1<span class="token punctuation">]</span> <span class="token punctuation">[</span>-110<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token number">112</span><span class="token punctuation">]</span> <span class="token parameter variable">-dup</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">5</span> POSCAR
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>然后通过在z方向将box增加15诶构建真空层，得到如下所示的构型：</p> <p>然后再继续修改POSCAR文件，使得其包含所有元素种类，并且按照Ni,Pd占比较低的元素占比，得到最终POSCAR文件如下所示（前10行）</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># Fcc oriented X=[11-1], Y=[-110], Z=[112].</span>
+<span class="token number">1.000000</span>
+      <span class="token number">6.11413935</span>        <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>
+      <span class="token number">0.00000000</span>        <span class="token number">2.49608694</span>        <span class="token number">0.00000000</span>
+      <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>       <span class="token number">36.61674698</span>
+Cr Fe Co Ni Pd
+<span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span>
+Cartesian
+      <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>
+      <span class="token number">1.24804347</span>        <span class="token number">1.76500000</span>        <span class="token number">1.24804347</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_1-2-用vasp获得准随机高熵合金构型"><a href="#_1-2-用vasp获得准随机高熵合金构型" class="header-anchor">#</a> 1.2 用VASP获得准随机高熵合金构型</h3> <p>这一步由2个部分组成：打乱元素序列得到新的构型、用VASP做结构优化。</p> <p>打乱元素顺序的bash脚本示例如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 输入文件名</span>
+<span class="token assign-left variable">input_file</span><span class="token operator">=</span><span class="token string">&quot;POSCAR&quot;</span>
+<span class="token comment"># 输出文件的前缀</span>
+<span class="token assign-left variable">output_prefix</span><span class="token operator">=</span><span class="token string">&quot;POSCAR&quot;</span>
+<span class="token comment"># 用于记录生成的哈希值</span>
+<span class="token builtin class-name">declare</span> <span class="token parameter variable">-A</span> generated_hashes
+
+<span class="token comment"># 获取POSCAR文件的前8行</span>
+<span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">8</span> <span class="token string">&quot;<span class="token variable">$input_file</span>&quot;</span> <span class="token operator">&gt;</span> header.txt
+
+<span class="token comment"># 获取POSCAR文件的第9到第38行</span>
+<span class="token function">sed</span> <span class="token parameter variable">-n</span> <span class="token string">'9,38p'</span> <span class="token string">&quot;<span class="token variable">$input_file</span>&quot;</span> <span class="token operator">&gt;</span> body.txt
+
+<span class="token comment"># 循环150次生成150个新的POSCAR文件</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token comment"># 创建一个新的文件名</span>
+    <span class="token assign-left variable">output_file</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${output_prefix}</span>-<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>&quot;</span>
+
+    <span class="token keyword">while</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+        <span class="token comment"># 随机打乱body.txt的内容</span>
+        <span class="token assign-left variable">shuffled_body</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">shuf</span> body.txt<span class="token variable">)</span></span>
+
+        <span class="token comment"># 计算打乱后的内容的哈希值</span>
+        <span class="token assign-left variable">hash_value</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$shuffled_body</span>&quot;</span> <span class="token operator">|</span> sha256sum <span class="token operator">|</span> <span class="token function">cut</span> <span class="token parameter variable">-d</span> <span class="token string">' '</span> <span class="token parameter variable">-f1</span><span class="token variable">)</span></span>
+
+        <span class="token comment"># 检查哈希值是否已存在</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token variable">${generated_hashes<span class="token punctuation">[</span>$hash_value<span class="token punctuation">]</span>}</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            <span class="token comment"># 如果没有重复，保存该哈希值并退出循环</span>
+            generated_hashes<span class="token punctuation">[</span><span class="token variable">$hash_value</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span>
+            <span class="token builtin class-name">break</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">done</span>
+
+    <span class="token comment"># 将前8行和打乱后的内容合并，输出到新的文件</span>
+    <span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> header.txt<span class="token variable">)</span></span><span class="token entity" title="\n">\n</span><span class="token variable">$shuffled_body</span>&quot;</span> <span class="token operator">&gt;</span> <span class="token string">&quot;<span class="token variable">$output_file</span>&quot;</span>
+<span class="token keyword">done</span>
+
+<span class="token comment"># 删除临时文件</span>
+<span class="token function">rm</span> header.txt
+<span class="token function">rm</span> body.txt
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;生成完毕！&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p>将这些构型与POTCAR文件进行打包得到VASP的结构优化计算输入文件，脚本如下</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token assign-left variable">poscar_file</span><span class="token operator">=</span><span class="token punctuation">..</span>/POSCAR-<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token function">mkdir</span> CrFeCoNiPd_112_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token builtin class-name">cd</span> CrFeCoNiPd_112_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token function">mv</span> <span class="token variable">$poscar_file</span> ./POSCAR
+    <span class="token function">cp</span> ~/05_atomsk/quinary_wuzhen_1/CrFeCoNiPd/CrFeCoNiPd_1_1/POTCAR <span class="token builtin class-name">.</span>
+    <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>然后通过VASP计算这些构型的能量，输入文件INCAR如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>IBRION <span class="token operator">=</span> <span class="token number">2</span>
+
+NPAR <span class="token operator">=</span> <span class="token number">8</span>
+
+ISMEAR <span class="token operator">=</span> <span class="token number">1</span>
+SIGMA <span class="token operator">=</span> <span class="token number">0.2</span>
+
+ISPIN <span class="token operator">=</span> <span class="token number">1</span>
+
+ISTART <span class="token operator">=</span> <span class="token number">0</span>
+ICHARG <span class="token operator">=</span> <span class="token number">2</span>
+
+ISIF <span class="token operator">=</span> <span class="token number">0</span>
+ISYM <span class="token operator">=</span> <span class="token number">0</span>
+
+NSW <span class="token operator">=</span> <span class="token number">1000</span>
+NELM <span class="token operator">=</span> <span class="token number">200</span>
+
+PREC <span class="token operator">=</span> Normal
+
+EDIFF <span class="token operator">=</span> 1E-4
+
+ALGO <span class="token operator">=</span> Fast
+
+KSPACING <span class="token operator">=</span> <span class="token number">0.2</span>
+LWAVE <span class="token operator">=</span> .FALSE.
+LCHARG  <span class="token operator">=</span>  .FALSE.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><p>上述150个任务放在scnet上使用vasp_std进行运行。上述所有结果理论上均可作为110表面的训练数据。</p> <h2 id="附录1-非振动构型的vasp输入文件生成工作流"><a href="#附录1-非振动构型的vasp输入文件生成工作流" class="header-anchor">#</a> 附录1. 非振动构型的VASP输入文件生成工作流</h2> <p>在~/05_atomsk/surface_112_wuzhen_2/目录下工作；</p> <h3 id="_1-1-使用atomsk生成初始构型-2"><a href="#_1-1-使用atomsk生成初始构型-2" class="header-anchor">#</a> 1.1 使用Atomsk生成初始构型</h3> <p>创建CrMnFeCoNi目录，并进入该目录。</p> <p>初始完美晶格的生成采用Atomsk，元素的话先随便写了一个Ni，命令如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>atomsk <span class="token parameter variable">--create</span> fcc <span class="token number">3.53</span> Ni orient <span class="token punctuation">[</span><span class="token number">11</span>-1<span class="token punctuation">]</span> <span class="token punctuation">[</span>-110<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token number">112</span><span class="token punctuation">]</span> <span class="token parameter variable">-dup</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">5</span> POSCAR
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>然后通过在z方向将box增加15诶构建真空层，得到如下所示的构型：</p> <p>然后再继续修改POSCAR文件，使得其包含所有元素种类，并且按照Ni,Pd占比较低的元素占比，得到最终POSCAR文件如下所示（前10行）</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># Fcc oriented X=[11-1], Y=[-110], Z=[112].</span>
+<span class="token number">1.000000</span>
+      <span class="token number">6.11413935</span>        <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>
+      <span class="token number">0.00000000</span>        <span class="token number">2.49608694</span>        <span class="token number">0.00000000</span>
+      <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>       <span class="token number">36.61674698</span>
+Cr Mn Fe Co Ni 
+<span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span> <span class="token number">6</span>
+Cartesian
+      <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>        <span class="token number">0.00000000</span>
+      <span class="token number">4.07609290</span>        <span class="token number">0.00000000</span>        <span class="token number">2.88223293</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_1-2-用vasp获得准随机高熵合金构型-2"><a href="#_1-2-用vasp获得准随机高熵合金构型-2" class="header-anchor">#</a> 1.2 用VASP获得准随机高熵合金构型</h3> <p>这一步由2个部分组成：打乱元素序列得到新的构型、用VASP做结构优化。</p> <p>打乱元素顺序的bash脚本示例如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 输入文件名</span>
+<span class="token assign-left variable">input_file</span><span class="token operator">=</span><span class="token string">&quot;POSCAR&quot;</span>
+<span class="token comment"># 输出文件的前缀</span>
+<span class="token assign-left variable">output_prefix</span><span class="token operator">=</span><span class="token string">&quot;POSCAR&quot;</span>
+<span class="token comment"># 用于记录生成的哈希值</span>
+<span class="token builtin class-name">declare</span> <span class="token parameter variable">-A</span> generated_hashes
+
+<span class="token comment"># 获取POSCAR文件的前8行</span>
+<span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">8</span> <span class="token string">&quot;<span class="token variable">$input_file</span>&quot;</span> <span class="token operator">&gt;</span> header.txt
+
+<span class="token comment"># 获取POSCAR文件的第9到第48行</span>
+<span class="token function">sed</span> <span class="token parameter variable">-n</span> <span class="token string">'9,38p'</span> <span class="token string">&quot;<span class="token variable">$input_file</span>&quot;</span> <span class="token operator">&gt;</span> body.txt
+
+<span class="token comment"># 循环150次生成150个新的POSCAR文件</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token comment"># 创建一个新的文件名</span>
+    <span class="token assign-left variable">output_file</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${output_prefix}</span>-<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>&quot;</span>
+
+    <span class="token keyword">while</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+        <span class="token comment"># 随机打乱body.txt的内容</span>
+        <span class="token assign-left variable">shuffled_body</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">shuf</span> body.txt<span class="token variable">)</span></span>
+
+        <span class="token comment"># 计算打乱后的内容的哈希值</span>
+        <span class="token assign-left variable">hash_value</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$shuffled_body</span>&quot;</span> <span class="token operator">|</span> sha256sum <span class="token operator">|</span> <span class="token function">cut</span> <span class="token parameter variable">-d</span> <span class="token string">' '</span> <span class="token parameter variable">-f1</span><span class="token variable">)</span></span>
+
+        <span class="token comment"># 检查哈希值是否已存在</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token variable">${generated_hashes<span class="token punctuation">[</span>$hash_value<span class="token punctuation">]</span>}</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            <span class="token comment"># 如果没有重复，保存该哈希值并退出循环</span>
+            generated_hashes<span class="token punctuation">[</span><span class="token variable">$hash_value</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span>
+            <span class="token builtin class-name">break</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">done</span>
+
+    <span class="token comment"># 将前8行和打乱后的内容合并，输出到新的文件</span>
+    <span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> header.txt<span class="token variable">)</span></span><span class="token entity" title="\n">\n</span><span class="token variable">$shuffled_body</span>&quot;</span> <span class="token operator">&gt;</span> <span class="token string">&quot;<span class="token variable">$output_file</span>&quot;</span>
+<span class="token keyword">done</span>
+
+<span class="token comment"># 删除临时文件</span>
+<span class="token function">rm</span> header.txt
+<span class="token function">rm</span> body.txt
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;生成完毕！&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p>将这些构型与POTCAR文件进行打包得到VASP的结构优化计算输入文件，脚本如下</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">150</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token assign-left variable">poscar_file</span><span class="token operator">=</span><span class="token punctuation">..</span>/POSCAR-<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token function">mkdir</span> CrMnFeCoNi_112_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token builtin class-name">cd</span> CrMnFeCoNi_112_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span>
+    <span class="token function">mv</span> <span class="token variable">$poscar_file</span> ./POSCAR
+    <span class="token function">cp</span> ~/05_atomsk/quinary_wuzhen_2/CrMnFeCoNi/CrMnFeCoNi_1_1/POTCAR <span class="token builtin class-name">.</span>
+    <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>然后通过VASP计算这些构型的能量，输入文件INCAR如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>IBRION <span class="token operator">=</span> <span class="token number">2</span>
+
+NPAR <span class="token operator">=</span> <span class="token number">8</span>
+
+ISMEAR <span class="token operator">=</span> <span class="token number">1</span>
+SIGMA <span class="token operator">=</span> <span class="token number">0.2</span>
+
+ISPIN <span class="token operator">=</span> <span class="token number">1</span>
+
+ISTART <span class="token operator">=</span> <span class="token number">0</span>
+ICHARG <span class="token operator">=</span> <span class="token number">2</span>
+
+ISIF <span class="token operator">=</span> <span class="token number">0</span>
+ISYM <span class="token operator">=</span> <span class="token number">0</span>
+
+NSW <span class="token operator">=</span> <span class="token number">1000</span>
+NELM <span class="token operator">=</span> <span class="token number">200</span>
+
+PREC <span class="token operator">=</span> Normal
+
+EDIFF <span class="token operator">=</span> 1E-4
+
+ALGO <span class="token operator">=</span> Fast
+
+KSPACING <span class="token operator">=</span> <span class="token number">0.2</span>
+LWAVE <span class="token operator">=</span> .FALSE.
+LCHARG  <span class="token operator">=</span>  .FALSE.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><p>上述150个任务放在scnet上使用vasp_std进行运行。上述所有结果理论上均可作为110表面的训练数据。</p></div> <footer class="page-edit" style="margin:0;"><div class="edit-link"><a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo/edit/master/VASP_Learning/19_VASP_quinary_surface.md" target="_blank" rel="noopener noreferrer">完善页面</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <!----></div></div>  <main class="footer"> <div class="copy-right"><span class="name"> 编程导航   |     </span> <a target="_blank" rel="noreferrer">
+          
+        </a></div></main></main> <aside class="page-sidebar"> <div class="page-side-toolbar"></div>  </aside></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.315c8cdd.js" defer></script><script src="/assets/js/2.d14395a5.js" defer></script><script src="/assets/js/87.f05e0fc1.js" defer></script>
+  </body>
+</html>

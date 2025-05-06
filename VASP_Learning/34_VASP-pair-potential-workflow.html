@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VASP: 对势计算工作流 | IfXie&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <meta name="description" content="The only way to do great work is to love what you do.">
+    <meta name="keywords" content="Solid Mechanics, Molecular Dynamics, First-principles calculations, AI4S, Linux systems, anime, fitness, indie games on Steam">
+    
+    <link rel="preload" href="/assets/css/0.styles.2f1e26cc.css" as="style"><link rel="preload" href="/assets/js/app.315c8cdd.js" as="script"><link rel="preload" href="/assets/js/2.d14395a5.js" as="script"><link rel="preload" href="/assets/js/43.36b0501a.js" as="script"><link rel="prefetch" href="/assets/js/1.cb40a502.js"><link rel="prefetch" href="/assets/js/10.a06bb1eb.js"><link rel="prefetch" href="/assets/js/100.d8f86cd3.js"><link rel="prefetch" href="/assets/js/101.bed104a2.js"><link rel="prefetch" href="/assets/js/102.b4d03739.js"><link rel="prefetch" href="/assets/js/103.95a18d9e.js"><link rel="prefetch" href="/assets/js/104.61995454.js"><link rel="prefetch" href="/assets/js/105.f008ed9c.js"><link rel="prefetch" href="/assets/js/106.1cbca132.js"><link rel="prefetch" href="/assets/js/107.96c5e311.js"><link rel="prefetch" href="/assets/js/108.ff8dd297.js"><link rel="prefetch" href="/assets/js/109.0e2b5264.js"><link rel="prefetch" href="/assets/js/11.1844feda.js"><link rel="prefetch" href="/assets/js/110.bb6d4bd4.js"><link rel="prefetch" href="/assets/js/111.1555679e.js"><link rel="prefetch" href="/assets/js/112.84b3d458.js"><link rel="prefetch" href="/assets/js/12.5db82bdc.js"><link rel="prefetch" href="/assets/js/13.d991dbfd.js"><link rel="prefetch" href="/assets/js/14.4991c582.js"><link rel="prefetch" href="/assets/js/15.8f20b0e9.js"><link rel="prefetch" href="/assets/js/16.da931f02.js"><link rel="prefetch" href="/assets/js/17.ddf6882c.js"><link rel="prefetch" href="/assets/js/18.394e8f93.js"><link rel="prefetch" href="/assets/js/19.166843f8.js"><link rel="prefetch" href="/assets/js/20.5908d844.js"><link rel="prefetch" href="/assets/js/21.d07aa552.js"><link rel="prefetch" href="/assets/js/22.966d7d6b.js"><link rel="prefetch" href="/assets/js/23.2c78a6e6.js"><link rel="prefetch" href="/assets/js/24.a4af1871.js"><link rel="prefetch" href="/assets/js/25.a3177620.js"><link rel="prefetch" href="/assets/js/26.b3ad2bf7.js"><link rel="prefetch" href="/assets/js/27.7bc151ef.js"><link rel="prefetch" href="/assets/js/28.977c97b1.js"><link rel="prefetch" href="/assets/js/29.fd6d35c5.js"><link rel="prefetch" href="/assets/js/3.9ed0fe0f.js"><link rel="prefetch" href="/assets/js/30.4f515c34.js"><link rel="prefetch" href="/assets/js/31.363934fa.js"><link rel="prefetch" href="/assets/js/32.e3f7e7f5.js"><link rel="prefetch" href="/assets/js/33.7ede003b.js"><link rel="prefetch" href="/assets/js/34.3cdd74d8.js"><link rel="prefetch" href="/assets/js/35.0ca46ff5.js"><link rel="prefetch" href="/assets/js/36.788b0036.js"><link rel="prefetch" href="/assets/js/37.4b8ecb30.js"><link rel="prefetch" href="/assets/js/38.948a8a9c.js"><link rel="prefetch" href="/assets/js/39.5833df35.js"><link rel="prefetch" href="/assets/js/4.d61d4261.js"><link rel="prefetch" href="/assets/js/40.0f43e9df.js"><link rel="prefetch" href="/assets/js/41.084d235c.js"><link rel="prefetch" href="/assets/js/42.a644c0c0.js"><link rel="prefetch" href="/assets/js/44.43176a68.js"><link rel="prefetch" href="/assets/js/45.3f7ff765.js"><link rel="prefetch" href="/assets/js/46.14c3c913.js"><link rel="prefetch" href="/assets/js/47.6b2ba057.js"><link rel="prefetch" href="/assets/js/48.9ce9355f.js"><link rel="prefetch" href="/assets/js/49.41b4f42a.js"><link rel="prefetch" href="/assets/js/5.ee32a04c.js"><link rel="prefetch" href="/assets/js/50.74e7f808.js"><link rel="prefetch" href="/assets/js/51.88a96ee0.js"><link rel="prefetch" href="/assets/js/52.adbed44f.js"><link rel="prefetch" href="/assets/js/53.1584fc24.js"><link rel="prefetch" href="/assets/js/54.c74a8657.js"><link rel="prefetch" href="/assets/js/55.c2c9e357.js"><link rel="prefetch" href="/assets/js/56.72792fbb.js"><link rel="prefetch" href="/assets/js/57.13e54b0b.js"><link rel="prefetch" href="/assets/js/58.1a8945be.js"><link rel="prefetch" href="/assets/js/59.23298057.js"><link rel="prefetch" href="/assets/js/6.e2fe98e2.js"><link rel="prefetch" href="/assets/js/60.5cbf2f68.js"><link rel="prefetch" href="/assets/js/61.09ffef37.js"><link rel="prefetch" href="/assets/js/62.ca082c0b.js"><link rel="prefetch" href="/assets/js/63.3d352ffa.js"><link rel="prefetch" href="/assets/js/64.96e33fa6.js"><link rel="prefetch" href="/assets/js/65.09b96199.js"><link rel="prefetch" href="/assets/js/66.af6869c4.js"><link rel="prefetch" href="/assets/js/67.dbfeb4ae.js"><link rel="prefetch" href="/assets/js/68.a6077bd3.js"><link rel="prefetch" href="/assets/js/69.02482c3b.js"><link rel="prefetch" href="/assets/js/7.f80011a2.js"><link rel="prefetch" href="/assets/js/70.762a2e57.js"><link rel="prefetch" href="/assets/js/71.43f8cb3d.js"><link rel="prefetch" href="/assets/js/72.7e02860e.js"><link rel="prefetch" href="/assets/js/73.5c8874d0.js"><link rel="prefetch" href="/assets/js/74.738551f7.js"><link rel="prefetch" href="/assets/js/75.ff5b07b1.js"><link rel="prefetch" href="/assets/js/76.37b179d5.js"><link rel="prefetch" href="/assets/js/77.8cbb7dd8.js"><link rel="prefetch" href="/assets/js/78.b335eb6e.js"><link rel="prefetch" href="/assets/js/79.f252fb6f.js"><link rel="prefetch" href="/assets/js/80.df5a0c1b.js"><link rel="prefetch" href="/assets/js/81.9c4a74fa.js"><link rel="prefetch" href="/assets/js/82.dd99a6da.js"><link rel="prefetch" href="/assets/js/83.375bfef6.js"><link rel="prefetch" href="/assets/js/84.c203297b.js"><link rel="prefetch" href="/assets/js/85.65859667.js"><link rel="prefetch" href="/assets/js/86.17a85554.js"><link rel="prefetch" href="/assets/js/87.f05e0fc1.js"><link rel="prefetch" href="/assets/js/88.53cf85f1.js"><link rel="prefetch" href="/assets/js/89.eae87e63.js"><link rel="prefetch" href="/assets/js/90.cfffede4.js"><link rel="prefetch" href="/assets/js/91.d4ee7592.js"><link rel="prefetch" href="/assets/js/92.e4319e49.js"><link rel="prefetch" href="/assets/js/93.7d763845.js"><link rel="prefetch" href="/assets/js/94.347d21f0.js"><link rel="prefetch" href="/assets/js/95.238a781b.js"><link rel="prefetch" href="/assets/js/96.04132eb7.js"><link rel="prefetch" href="/assets/js/97.a700d650.js"><link rel="prefetch" href="/assets/js/98.62afc795.js"><link rel="prefetch" href="/assets/js/99.db431a00.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.b562965b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2f1e26cc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="IfXie's Blog" class="logo"> <span class="site-name can-hide">IfXie's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/VASP_Learning/" class="nav-link router-link-active">
+  VASP学习路线
+</a></div> <a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VASP: 对势计算工作流</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_1-初始构型的构造" class="sidebar-link">1. 初始构型的构造</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_1-1-脚本构造单质构型" class="sidebar-link">1.1 脚本构造单质构型</a></li><li class="sidebar-sub-header"><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_1-2-脚本构造合金" class="sidebar-link">1.2 脚本构造合金</a></li></ul></li><li><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_2-计算脚本" class="sidebar-link">2. 计算脚本</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_2-1-incar指令" class="sidebar-link">2.1 INCAR指令</a></li><li class="sidebar-sub-header"><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_2-2-scnet批量任务提交指令" class="sidebar-link">2.2 scnet批量任务提交指令</a></li></ul></li><li><a href="/VASP_Learning/34_VASP-pair-potential-workflow.html#_3-结果提取脚本" class="sidebar-link">3. 结果提取脚本</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="content single-column"><div class="main-content"><div class="theme-default-content custom-content content__default"><h1 id="vasp-对势计算工作流"><a href="#vasp-对势计算工作流" class="header-anchor">#</a> VASP: 对势计算工作流</h1> <p>对势分为AA对势和AB对势，针对CrFeCoNiPd和CrMnFeCoNi高熵合金，AA对势有6种，AB对势有14种。</p> <p>计划从两个原子距离0.05埃为起点，并以0.05埃为步长计算对势，上限为9.0埃，对于每种配对总计180个任务。</p> <p>总计3600个任务。</p> <h2 id="_1-初始构型的构造"><a href="#_1-初始构型的构造" class="header-anchor">#</a> 1. 初始构型的构造</h2> <p>首先需要构造一个足够大的box，然后将两个原子之间的距离不断拉长。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#! /bin/bash</span>
+<span class="token assign-left variable">element1</span><span class="token operator">=</span><span class="token string">&quot;Ni&quot;</span>
+<span class="token assign-left variable">element2</span><span class="token operator">=</span><span class="token string">&quot;Pd&quot;</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">180</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token assign-left variable">x1</span><span class="token operator">=</span><span class="token number">15.50</span>
+<span class="token assign-left variable">x2</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;scale=3; 15.5+<span class="token variable">$i</span>*0.05&quot;</span> <span class="token operator">|</span> <span class="token function">bc</span><span class="token variable">)</span></span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span>POSCAR_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span> <span class="token operator">&lt;&lt;</span><span class="token operator">!</span>
+pair-potential:
+ <span class="token number">1.0</span>
+ <span class="token number">40.0</span> <span class="token number">0.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">20.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">0.0</span> <span class="token number">20.0</span>
+ <span class="token variable">$element1</span> <span class="token variable">$element2</span>
+ <span class="token number">1</span> <span class="token number">1</span> 
+cartesian
+<span class="token variable">$x1</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token variable">$x2</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token operator">!</span>
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>其次，出于对于计算效率的考量，可以将10个构型打包为一个目录下进行计算：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 循环10个文件一组进行处理</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">18</span><span class="token punctuation">}</span>
+<span class="token keyword">do</span>
+  <span class="token comment"># 计算文件的起始编号和结束编号</span>
+  <span class="token assign-left variable">start</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span> <span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token variable">))</span></span>   <span class="token comment"># 计算每组的起始文件编号</span>
+  <span class="token assign-left variable">end</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span> i <span class="token operator">*</span> <span class="token number">10</span> <span class="token variable">))</span></span>                <span class="token comment"># 计算每组的结束文件编号</span>
+  
+  <span class="token comment"># 创建目标目录（如果没有的话）</span>
+  <span class="token assign-left variable">result_dir</span><span class="token operator">=</span><span class="token string">&quot;./result_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%02d&quot;</span> $i<span class="token variable">)</span></span>&quot;</span>
+  <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> <span class="token string">&quot;<span class="token variable">$result_dir</span>&quot;</span>
+  
+  <span class="token comment"># 打包文件到对应的目录中</span>
+  <span class="token keyword">for</span> <span class="token for-or-select variable">j</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">seq</span> <span class="token parameter variable">-f</span> <span class="token string">&quot;%03g&quot;</span> $start $end<span class="token variable">)</span></span>
+  <span class="token keyword">do</span>
+    <span class="token comment"># 将每个文件移动到相应目录中</span>
+    <span class="token function">mv</span> <span class="token string">&quot;POSCAR_<span class="token variable">$j</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$result_dir</span>/&quot;</span>
+  <span class="token keyword">done</span>
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h3 id="_1-1-脚本构造单质构型"><a href="#_1-1-脚本构造单质构型" class="header-anchor">#</a> 1.1 脚本构造单质构型</h3> <p>总共6种单质元素，分别是Cr, Mn, Fe, Co, Ni, Pd，所以构造脚本如下所示</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token builtin class-name">declare</span> <span class="token parameter variable">-A</span> elements
+elements<span class="token punctuation">[</span>Cr<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr&quot;</span>
+elements<span class="token punctuation">[</span>Mn<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Mn&quot;</span>
+elements<span class="token punctuation">[</span>Fe<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Fe&quot;</span>
+elements<span class="token punctuation">[</span>Co<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Co&quot;</span>
+elements<span class="token punctuation">[</span>Ni<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Ni&quot;</span>
+elements<span class="token punctuation">[</span>Pd<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Pd&quot;</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">system</span> <span class="token keyword">in</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">!</span>elements<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token assign-left variable">element</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $<span class="token punctuation">{</span>elements<span class="token punctuation">[</span>$system<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token variable">)</span></span>
+<span class="token function">mkdir</span> <span class="token variable">$element</span><span class="token variable">$element</span>-pair-potential
+<span class="token builtin class-name">cd</span> <span class="token variable">$element</span><span class="token variable">$element</span>-pair-potential
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">180</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token assign-left variable">x1</span><span class="token operator">=</span><span class="token number">15.50</span>
+<span class="token assign-left variable">x2</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;scale=3; 15.5+<span class="token variable">$i</span>*0.05&quot;</span> <span class="token operator">|</span> <span class="token function">bc</span><span class="token variable">)</span></span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span>POSCAR_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span> <span class="token operator">&lt;&lt;</span><span class="token operator">!</span>
+pair-potential:
+ <span class="token number">1.0</span>
+ <span class="token number">40.0</span> <span class="token number">0.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">20.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">0.0</span> <span class="token number">20.0</span>
+ <span class="token variable">$element</span>
+ <span class="token number">2</span> 
+cartesian
+<span class="token variable">$x1</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token variable">$x2</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token operator">!</span>
+<span class="token keyword">done</span>
+<span class="token function">cp</span> ~/POTCAR_vasp/VASP/<span class="token variable">$element</span>/POTCAR <span class="token builtin class-name">.</span>
+<span class="token function">cp</span> <span class="token punctuation">..</span>/pack_up.sh <span class="token builtin class-name">.</span>
+<span class="token builtin class-name">source</span> pack_up.sh
+<span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><h3 id="_1-2-脚本构造合金"><a href="#_1-2-脚本构造合金" class="header-anchor">#</a> 1.2 脚本构造合金</h3> <p>总共14种二元合金，如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token builtin class-name">declare</span> <span class="token parameter variable">-A</span> elements
+elements<span class="token punctuation">[</span>FeNi<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Fe Ni&quot;</span>
+elements<span class="token punctuation">[</span>FeCo<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Fe Co&quot;</span>
+elements<span class="token punctuation">[</span>CrFe<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr Fe&quot;</span>
+elements<span class="token punctuation">[</span>FePd<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Fe Pd&quot;</span>
+elements<span class="token punctuation">[</span>MnFe<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Mn Fe&quot;</span>
+elements<span class="token punctuation">[</span>CrNi<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr Ni&quot;</span>
+elements<span class="token punctuation">[</span>CoNi<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Co Ni&quot;</span>
+elements<span class="token punctuation">[</span>NiPd<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Ni Pd&quot;</span>
+elements<span class="token punctuation">[</span>MnNi<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Mn Ni&quot;</span>
+elements<span class="token punctuation">[</span>CrCo<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr Co&quot;</span>
+elements<span class="token punctuation">[</span>CrPd<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr Pd&quot;</span>
+elements<span class="token punctuation">[</span>CrMn<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Cr Mn&quot;</span>
+elements<span class="token punctuation">[</span>CoPd<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Co Pd&quot;</span>
+elements<span class="token punctuation">[</span>MnCo<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;Mn Co&quot;</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">system</span> <span class="token keyword">in</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">!</span>elements<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token assign-left variable">element_pair</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${elements<span class="token punctuation">[</span>$system<span class="token punctuation">]</span>}</span>&quot;</span>
+<span class="token assign-left variable">element1</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $element_pair <span class="token operator">|</span> <span class="token function">cut</span> -d<span class="token string">' '</span> <span class="token parameter variable">-f1</span><span class="token variable">)</span></span>
+<span class="token assign-left variable">element2</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $element_pair <span class="token operator">|</span> <span class="token function">cut</span> -d<span class="token string">' '</span> <span class="token parameter variable">-f2</span><span class="token variable">)</span></span>
+<span class="token function">mkdir</span> <span class="token variable">$element1</span><span class="token variable">$element2</span>-pair-potential
+<span class="token builtin class-name">cd</span> <span class="token variable">$element1</span><span class="token variable">$element2</span>-pair-potential
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">180</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+<span class="token assign-left variable">x1</span><span class="token operator">=</span><span class="token number">15.50</span>
+<span class="token assign-left variable">x2</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;scale=3; 15.5+<span class="token variable">$i</span>*0.05&quot;</span> <span class="token operator">|</span> <span class="token function">bc</span><span class="token variable">)</span></span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span>POSCAR_<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">printf</span> <span class="token string">&quot;%03d&quot;</span> $i<span class="token variable">)</span></span> <span class="token operator">&lt;&lt;</span><span class="token operator">!</span>
+pair-potential:
+ <span class="token number">1.0</span>
+ <span class="token number">40.0</span> <span class="token number">0.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">20.0</span> <span class="token number">0.0</span>
+ <span class="token number">0.0</span> <span class="token number">0.0</span> <span class="token number">20.0</span>
+ <span class="token variable">$element1</span> <span class="token variable">$element2</span>
+ <span class="token number">1</span> <span class="token number">1</span>
+cartesian
+<span class="token variable">$x1</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token variable">$x2</span> <span class="token number">10.0</span> <span class="token number">10.0</span>
+<span class="token operator">!</span>
+<span class="token keyword">done</span>
+<span class="token function">cat</span> ~/POTCAR_vasp/VASP/<span class="token variable">$element1</span>/POTCAR ~/POTCAR_vasp/VASP/<span class="token variable">$element2</span>/POTCAR <span class="token operator">&gt;</span> ./POTCAR
+<span class="token function">cp</span> <span class="token punctuation">..</span>/pack_up.sh <span class="token builtin class-name">.</span>
+<span class="token builtin class-name">source</span> pack_up.sh
+<span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br></div></div><h2 id="_2-计算脚本"><a href="#_2-计算脚本" class="header-anchor">#</a> 2. 计算脚本</h2> <h3 id="_2-1-incar指令"><a href="#_2-1-incar指令" class="header-anchor">#</a> 2.1 INCAR指令</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code># structural optimization
+IBRION = 2
+
+# Ncore = 64
+NPAR = 8
+
+# Fermi surface set
+ISMEAR = 1
+SIGMA = 0.2
+
+# cal the stress
+ISIF = 2
+
+# not to read the WAVECAR file.
+ISTART = 0
+
+# VASP does not use symmetry
+ISYM = 0
+
+# the max ions &amp; element steps
+NSW = 1
+NELM = 600
+
+# the cal prec
+PREC = High
+
+# the end cut
+EDIFF = 1E-4
+
+# the algo's choice
+ALGO = Fast
+
+# the kpoint set
+KSPACING = 0.2
+
+# not create WAVECAR CHGCAR
+LWAVE = .FALSE.
+LCHARG  =  .FALSE.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br></div></div><h3 id="_2-2-scnet批量任务提交指令"><a href="#_2-2-scnet批量任务提交指令" class="header-anchor">#</a> 2.2 scnet批量任务提交指令</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment">#SBATCH -J vasp</span>
+<span class="token comment">#SBATCH -N 1 </span>
+<span class="token comment">#SBATCH --ntasks-per-node=64 </span>
+<span class="token comment">#SBATCH -p wzhcnormal</span>
+
+module purge
+<span class="token builtin class-name">source</span> /work/home/if_xie/apprepo/vasp/6.4.1-ioptcell_intelmpi2017_hdf5_libxc/scripts/env.sh
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MKL_DEBUG_CPU_TYPE</span><span class="token operator">=</span><span class="token number">5</span> <span class="token comment">#加速代码</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MKL_CBWR</span><span class="token operator">=</span>AVX2 <span class="token comment">#使cpu默认支持avx2</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">I_MPI_PIN_DOMAIN</span><span class="token operator">=</span>numa <span class="token comment">#内存位置与cpu位置绑定，加速内存读取。对于内存带宽要求高的计算提速明显</span>
+
+<span class="token comment"># Dirrectory containing the jobs</span>
+<span class="token assign-left variable">WORK_DIR</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>
+
+<span class="token comment"># Paths to the INCAR and POTCAR files</span>
+<span class="token assign-left variable">INCAR_PATH</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$WORK_DIR</span>/../../INCAR&quot;</span>
+<span class="token assign-left variable">POTCAR_PATH</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$WORK_DIR</span>/../POTCAR&quot;</span>
+
+<span class="token comment"># List of job directories</span>
+<span class="token assign-left variable">JOB_DIRS</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ls</span> POSCAR_*<span class="token variable">)</span></span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">JOB_DIR</span> <span class="token keyword">in</span> <span class="token variable">$JOB_DIRS</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token comment"># Go into the job directory</span>
+    <span class="token builtin class-name">cd</span> <span class="token variable">$WORK_DIR</span>
+    <span class="token assign-left variable">DIR_NAME</span><span class="token operator">=</span><span class="token string">&quot;dir_<span class="token variable">$JOB_DIR</span>&quot;</span>
+    <span class="token function">mkdir</span> <span class="token variable">$DIR_NAME</span>
+    <span class="token builtin class-name">cd</span> <span class="token variable">$WORK_DIR</span>/<span class="token variable">$DIR_NAME</span>
+
+    <span class="token comment"># Create symbolic links to the INCAR and POTCAR files</span>
+    <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable">$INCAR_PATH</span> INCAR
+    <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable">$POTCAR_PATH</span> POTCAR
+    <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable">$WORK_DIR</span>/<span class="token variable">$JOB_DIR</span> POSCAR
+
+    srun <span class="token parameter variable">--mpi</span><span class="token operator">=</span>pmi2 vasp_std
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><h2 id="_3-结果提取脚本"><a href="#_3-结果提取脚本" class="header-anchor">#</a> 3. 结果提取脚本</h2> <p>从OSZICAR文件中提取总势能即为对势，序号的0.05倍就是两者之间的距离，提取脚本如下所示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">dir</span> <span class="token keyword">in</span> */<span class="token punctuation">;</span>
+<span class="token keyword">do</span>
+    <span class="token builtin class-name">cd</span> <span class="token variable">$dir</span>
+    <span class="token keyword">for</span> <span class="token for-or-select variable">dirdir</span> <span class="token keyword">in</span> */<span class="token punctuation">;</span>
+    <span class="token keyword">do</span>
+	<span class="token builtin class-name">cd</span> <span class="token variable">$dirdir</span>
+	<span class="token function">grep</span> <span class="token assign-left variable">F</span><span class="token operator">=</span> OSZICAR <span class="token operator">|</span> <span class="token function">tail</span> <span class="token parameter variable">-n</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print $3}'</span> <span class="token operator">&gt;&gt;</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/pair_potential.txt 
+    	<span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+    <span class="token keyword">done</span>
+    <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+<span class="token keyword">done</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>NiNi的结果如下所示:</p> <p><img alt="本地路径" data-src="/assets/img/44_VASP_pair_energy_plot_NiNi.3dfb5036.png" loading="lazy" class="lazy"></p> <p>不难看出，当能量较小时，VASP的计算结果具有一定的误差，因此我们后续将会使用一种数学方法来使得曲线更为光滑。</p></div> <footer class="page-edit" style="margin:0;"><div class="edit-link"><a href="https://github.com/IfXie-Solid-Mechanics/my-first-repo/edit/master/VASP_Learning/34_VASP-pair-potential-workflow.md" target="_blank" rel="noopener noreferrer">完善页面</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <!----></div></div>  <main class="footer"> <div class="copy-right"><span class="name"> 编程导航   |     </span> <a target="_blank" rel="noreferrer">
+          
+        </a></div></main></main> <aside class="page-sidebar"> <div class="page-side-toolbar"></div>  </aside></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.315c8cdd.js" defer></script><script src="/assets/js/2.d14395a5.js" defer></script><script src="/assets/js/43.36b0501a.js" defer></script>
+  </body>
+</html>
